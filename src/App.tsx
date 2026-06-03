@@ -238,19 +238,42 @@ function WorkModal({ work }: { work: Work }) {
 }
 
 function SculptureModal({ sculpture }: { sculpture: Sculpture }) {
+  const [lightbox, setLightbox] = useState<string | null>(null);
   return (
-    <article className="sculpture-layout">
-      <section className="sculpture-copy">
-        <span className="eyebrow">{sculpture.artifact}</span>
-        <h2 className="sculpture-title">
-          <span>{sculpture.title}</span>
-          <em>{sculpture.titleEn}</em>
-        </h2>
-        <div className="sculpture-body">{sculpture.body.map((line) => <p key={line}>{line}</p>)}</div>
-        {sculpture.highlights?.length ? <ul className="sculpture-chip-list">{sculpture.highlights.map((item) => <li key={item}>{item}</li>)}</ul> : null}
-        {sculpture.note ? <p className="sculpture-note">{sculpture.note}</p> : null}
-      </section>
-    </article>
+    <>
+      <article className="sculpture-layout">
+        <section className="sculpture-copy">
+          <span className="eyebrow">{sculpture.artifact}</span>
+          <h2 className="sculpture-title">
+            <span>{sculpture.title}</span>
+            <em>{sculpture.titleEn}</em>
+          </h2>
+          <div className="sculpture-body">{sculpture.body.map((line) => <p key={line}>{line}</p>)}</div>
+          {sculpture.highlights?.length ? <ul className="sculpture-chip-list">{sculpture.highlights.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+          {sculpture.note ? <p className="sculpture-note">{sculpture.note}</p> : null}
+        </section>
+        {sculpture.certs?.length ? (
+          <section className="cert-gallery">
+            <h3>Certificates</h3>
+            <div className="cert-grid">
+              {sculpture.certs.map((cert) => (
+                <button key={cert.full} type="button" onClick={() => setLightbox(cert.full)} title={cert.name}>
+                  <img src={cert.thumb} alt={cert.name} />
+                </button>
+              ))}
+            </div>
+          </section>
+        ) : null}
+      </article>
+      <AnimatePresence>
+        {lightbox && (
+          <motion.div className="lightbox" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setLightbox(null)}>
+            <img src={lightbox} alt="" />
+            <button type="button" className="lightbox-close" onClick={() => setLightbox(null)}>×</button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 

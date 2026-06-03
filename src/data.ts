@@ -37,6 +37,7 @@ export type Sculpture = {
   body: string[];
   highlights?: string[];
   note?: string;
+  certs?: { thumb: string; full: string; name: string }[];
   code: string;
   targetId: string;
   position: Vec3;
@@ -199,7 +200,15 @@ export const portfolio = {
 
   ] satisfies LinkItem[],
   tutorials: [
-
+    {
+      id: "thinking-in-claude-code",
+      section: "manual",
+      title: "Thinking in Claude Code",
+      description: "Thinking C++风格的Claude Cod源码编程思想。使用team agent构建大纲，然后构建task list逐步完成所有章节，所有章节中需要用多个team agent共同运行，使用brainstram作为知识库",
+      coverPath: asset("assets/books/thinking-in-claude-code.webp"),
+      externalUrl: asset("assets/books/thinking-in-claude-code.pdf"),
+      platform: "PDF",
+    }
   ] satisfies LinkItem[],
   socials: {
     github: "https://github.com/kenshinshen1314-sudo?tab=repositories",
@@ -249,32 +258,38 @@ const sculptureCopy = {
     body: ["嗨，我叫剑心，临海长大，杭州求学，现居杭州，是一名AI萌新。"]
   },
   B: {
-    artifact: "一份折叠过的履历",
-    label: "折叠履历",
+    artifact: "过往履历",
+    label: "过往履历",
     title: "金融IT转向AI",
     titleEn: "From Financial IT to AI",
-    body: ["2005-2009 浙江传媒学院 电子信息工程 本科", "2014-2025 恒生电子股份有限公司 金融产品维护经理", "2025-至今 转型AI 独立开发和内容创作", "这条路没有按常规路线走到终点，但它刚好构成了现在的我。"]
+    body: ["2025-至今 转型AI 独立开发和内容创作", "2014-2025 恒生电子股份有限公司 金融产品维护经理", "2012-2014 信雅达数码科技 项目经理", "2009-2012 杭州西软科技限公司 项目经理", "2005-2009 浙江传媒学院 电子信息工程 本科", "这条路没有按常规路线走到终点，但它刚好构成了现在的我。"]
   },
   C: {
     artifact: "一串绑在一起的通行证",
     label: "通行证",
     title: "切换的职业频道",
     titleEn: "Channels I Have Moved Through",
-    body: ["2009-2012 杭州西软科技限公司 项目经理", "2012-2014 信雅达数码科技 项目经理", "2024-2025 恒生电子股份有限公司 金融产品维护经理", "2025 至今  转型AI 独立开发和内容创作", "打工的轨迹结束了，录像带被切到最新的画面。"]
+    body: [ "2009-2025 项目经理&&金融产品维护经理", "2025 至今 转型AI 独立开发和内容创作", "打工的轨迹结束了，录像带被切到最新的画面。"]
   },
   D: {
-    artifact: "撕下来的书页一角",
-    label: "书页一角",
-    title: "几股审美洋流",
-    titleEn: "A Few Currents Under the Surface",
-    body: ["喜欢的作者：刘慈欣、Isaac Asimov、Arthur Charles Clarke、加缪、安.兰德", "这大概就是我大脑里几股交汇的洋流，也是我审美的底色。"]
+    artifact: "荣誉&&证书",
+    label: "荣誉&&证书",
+    title: "荣誉&&证书",
+    titleEn: "Honors && Certificates",
+    body: [],
+    certs: [
+      { thumb: asset("assets/certs/thumbs/gce.png"), full: asset("assets/certs/gce.png"), name: "Google Cloud Engineer" },
+      { thumb: asset("assets/certs/thumbs/pmp.png"), full: asset("assets/certs/pmp.png"), name: "PMP" },
+      { thumb: asset("assets/certs/thumbs/oer.png"), full: asset("assets/certs/oer.png"), name: "UNESCO Open Education" },
+      { thumb: asset("assets/certs/thumbs/unesco1.png"), full: asset("assets/certs/unesco1.png"), name: "UNESCO Certificate" }
+    ]
   },
   E: {
     artifact: "弹出的全息成就面板",
     label: "全息面板",
     title: "独立开发&&内容创作者",
     titleEn: "Independent dev/content creators",
-    body: ["独立开发了剧本创作工具Laper.ai、Web版Claudecode、食之书、收录高审美网站的导航站"],
+    body: ["智能剧本创作工具Script.ai", "WEB版Claude Code(基于Claude Code Cli)", "食之书", "剑心的军火库: 收录高审美网站的导航站"],
     note: ""
   }
 } satisfies Record<string, Omit<Sculpture, "code" | "targetId" | "position" | "rotationY">>;

@@ -9,7 +9,7 @@ function copyStaticShowcaseAssets() {
     closeBundle() {
       const root = process.cwd();
       const outDir = resolve(root, "dist");
-      for (const entry of ["assets/audio", "assets/models", "assets/podcasts", "assets/posters", "assets/textures", "assets/videos-web", "docs"]) {
+      for (const entry of ["assets/audio", "assets/models", "assets/podcasts", "assets/posters", "assets/textures", "assets/videos-web", "assets/books", "assets/certs", "docs"]) {
         const from = resolve(root, entry);
         if (existsSync(from)) cpSync(from, resolve(outDir, entry), { recursive: true });
       }
