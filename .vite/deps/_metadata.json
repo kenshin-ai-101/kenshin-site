@@ -1,8 +1,97 @@
 {
-  "hash": "277efcf4",
+  "hash": "b6fdc038",
   "configHash": "99af838d",
-  "lockfileHash": "de0014b8",
-  "browserHash": "8386d424",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "0ef3fecd",
+  "browserHash": "3d731e41",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "34721c21",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "cc82f20a",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "30afec7a",
+      "needsInterop": true
+    },
+    "framer-motion": {
+      "src": "../../node_modules/framer-motion/dist/es/index.mjs",
+      "file": "framer-motion.js",
+      "fileHash": "7cedd5c4",
+      "needsInterop": false
+    },
+    "@react-three/fiber": {
+      "src": "../../node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+      "file": "@react-three_fiber.js",
+      "fileHash": "0d9ed8be",
+      "needsInterop": false
+    },
+    "@react-three/drei": {
+      "src": "../../node_modules/@react-three/drei/index.js",
+      "file": "@react-three_drei.js",
+      "fileHash": "4ba73aac",
+      "needsInterop": false
+    },
+    "@react-three/rapier": {
+      "src": "../../node_modules/@react-three/rapier/dist/react-three-rapier.esm.js",
+      "file": "@react-three_rapier.js",
+      "fileHash": "0330e9f5",
+      "needsInterop": false
+    },
+    "three": {
+      "src": "../../node_modules/three/build/three.module.js",
+      "file": "three.js",
+      "fileHash": "7cfe5e0f",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "hls-XHYDEOWA": {
+      "file": "hls-XHYDEOWA.js"
+    },
+    "vision_bundle-TIQSW5H2": {
+      "file": "vision_bundle-TIQSW5H2.js"
+    },
+    "rapier-L4JMUJOZ": {
+      "file": "rapier-L4JMUJOZ.js"
+    },
+    "chunk-LFC33N37": {
+      "file": "chunk-LFC33N37.js"
+    },
+    "chunk-LAXPYCQ6": {
+      "file": "chunk-LAXPYCQ6.js"
+    },
+    "chunk-7RGYOSCM": {
+      "file": "chunk-7RGYOSCM.js"
+    },
+    "chunk-AQSCUO2G": {
+      "file": "chunk-AQSCUO2G.js"
+    },
+    "chunk-ZOHQ645K": {
+      "file": "chunk-ZOHQ645K.js"
+    },
+    "chunk-5AFWLUM6": {
+      "file": "chunk-5AFWLUM6.js"
+    },
+    "chunk-RBO73NZH": {
+      "file": "chunk-RBO73NZH.js"
+    },
+    "chunk-J2QUVTXK": {
+      "file": "chunk-J2QUVTXK.js"
+    },
+    "chunk-PDNHVAOE": {
+      "file": "chunk-PDNHVAOE.js"
+    },
+    "chunk-2TUXWMP5": {
+      "file": "chunk-2TUXWMP5.js"
+    }
+  }
 }

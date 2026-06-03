@@ -659,17 +659,17 @@ function FlowerCluster({ color, position }: { color: string; position: Vec3 }) {
   );
 }
 
-function WorkBoards({ activeTargetId, labelsVisible, onInteractTarget }: Pick<SceneRootProps, "activeTargetId" | "labelsVisible" | "onInteractTarget">) {
+function WorkBoards({ activeTargetId, labelsVisible, playerPosition, onInteractTarget }: Pick<SceneRootProps, "activeTargetId" | "labelsVisible" | "playerPosition" | "onInteractTarget">) {
   return (
     <group>
       {workLayouts.map((layout) => (
-        <WorkBoard key={layout.work.id} active={activeTargetId === layout.targetId} labelsVisible={labelsVisible} layout={layout} onInteract={() => onInteractTarget(layout.targetId)} />
+        <WorkBoard key={layout.work.id} active={activeTargetId === layout.targetId} labelsVisible={labelsVisible} layout={layout} playerPosition={playerPosition} onInteract={() => onInteractTarget(layout.targetId)} />
       ))}
     </group>
   );
 }
 
-function WorkBoard({ active, labelsVisible, layout, onInteract }: { active: boolean; labelsVisible: boolean; layout: (typeof workLayouts)[number]; onInteract: () => void }) {
+function WorkBoard({ active, labelsVisible, layout, playerPosition, onInteract }: { active: boolean; labelsVisible: boolean; layout: (typeof workLayouts)[number]; playerPosition: Vec3; onInteract: () => void }) {
   const texture = useTexture(layout.work.posterPath);
 
   useEffect(() => {
@@ -694,13 +694,35 @@ function WorkBoard({ active, labelsVisible, layout, onInteract }: { active: bool
 
   const isPlaceholder = layout.work.id.startsWith("placeholder_");
 
+  const dx = playerPosition[0] - layout.position[0];
+  const dz = playerPosition[2] - layout.position[2];
+  const rotatedX = dx * Math.cos(-layout.rotationY) - dz * Math.sin(-layout.rotationY);
+  const rotatedZ = dx * Math.sin(-layout.rotationY) + dz * Math.cos(-layout.rotationY);
+  const isNearby = Math.abs(rotatedX) < 2.8 && rotatedZ > -0.5 && rotatedZ < 3.5;
+  const showSpotlight = isNearby && !isPlaceholder;
+
   return (
     <RigidBody type="fixed" colliders={false} position={layout.position} rotation={[0, layout.rotationY, 0]}>
       <CuboidCollider args={[boardWidth / 2, posterHeight / 2, boardDepth / 2]} position={[0, centerY, 0]} />
       <CuboidCollider args={[0.36, 0.7, 2.2]} position={[0, 0.35, 0]} />
+      {showSpotlight && (
+        <spotLight
+          color="#fff8e8"
+          intensity={3.5}
+          position={[0, 14, 2.5]}
+          angle={0.42}
+          penumbra={0.5}
+          decay={1.5}
+          castShadow
+          shadow-bias={-0.001}
+          shadow-mapSize-width={512}
+          shadow-mapSize-height={512}
+          target-position={[0, centerY, boardDepth / 2]}
+        />
+      )}
       <mesh castShadow receiveShadow position={[0, centerY, 0]} onPointerDown={(event) => stopAnd(event, onInteract)}>
         <boxGeometry args={[boardWidth, posterHeight, boardDepth]} />
-        <meshStandardMaterial color={active ? "#e9cbbb" : "#d4c0b3"} emissive={active ? "#a8756a" : "#000000"} emissiveIntensity={active ? 0.14 : 0} roughness={0.9} />
+        <meshStandardMaterial color={active ? "#e9cbbb" : "#d4c0b3"} emissive={active || showSpotlight ? "#a8756a" : "#000000"} emissiveIntensity={active ? 0.14 : showSpotlight ? 0.08 : 0} roughness={0.9} />
       </mesh>
       {isPlaceholder ? (
         <mesh position={[0, centerY, boardDepth / 2 + 0.012]} onPointerDown={(event) => stopAnd(event, onInteract)}>
@@ -714,31 +736,21 @@ function WorkBoard({ active, labelsVisible, layout, onInteract }: { active: bool
         </mesh>
       )}
       <BoardFrame width={boardWidth} height={posterHeight} centerY={centerY} active={active} />
-      <BoardLighting width={boardWidth} height={posterHeight} centerY={centerY} active={active} />
+      <BoardLighting width={boardWidth} height={posterHeight} centerY={centerY} active={active} showSpotlight={showSpotlight} />
       {labelsVisible && !layout.work.videoPath && !isPlaceholder ? <TouringSign centerY={centerY} height={posterHeight} width={boardWidth} /> : null}
     </RigidBody>
   );
 }
 
-function BoardLighting({ width, height, centerY, active }: { width: number; height: number; centerY: number; active: boolean }) {
-  const lampY = centerY + height / 2 + 0.32;
-  const glowOpacity = active ? 0.42 : 0.18;
-  const coneOpacity = active ? 0.3 : 0.11;
+function BoardLighting({ width, height, centerY, active, showSpotlight }: { width: number; height: number; centerY: number; active: boolean; showSpotlight: boolean }) {
+  if (!showSpotlight) return <group />;
 
+  const coneOpacity = 0.1;
   return (
     <group>
-      <pointLight color="#ffd2a2" distance={active ? 6.2 : 3.2} intensity={active ? 2.8 : 0.72} position={[0, lampY, 0.86]} />
-      <mesh castShadow position={[0, lampY, 0.34]}>
-        <boxGeometry args={[width * 0.74, 0.1, 0.14]} />
-        <meshStandardMaterial color={active ? "#ffe0bd" : "#e7c9aa"} emissive="#ffc184" emissiveIntensity={active ? 0.9 : 0.36} roughness={0.55} />
-      </mesh>
-      <mesh position={[0, centerY + 0.02, 0.155]}>
-        <planeGeometry args={[width * 0.88, height * 0.88]} />
-        <meshBasicMaterial color="#ffd8a8" depthTest={false} depthWrite={false} opacity={glowOpacity} transparent />
-      </mesh>
-      <mesh position={[0, centerY - height * 0.02, 0.62]} rotation={[Math.PI / 2, 0, 0]} scale={[width * 0.52, height * 0.54, width * 0.52]}>
-        <coneGeometry args={[1, 1, 32, 1, true]} />
-        <meshBasicMaterial color="#ffd8a8" depthTest={false} depthWrite={false} opacity={coneOpacity} side={THREE.DoubleSide} transparent />
+      <mesh position={[0, centerY + height / 2 + 0.32, 0.86]} rotation={[0, 0, 0]}>
+        <coneGeometry args={[width * 0.95, 12, 32, 1, true]} />
+        <meshBasicMaterial color="#fff8e8" depthTest={false} depthWrite={false} opacity={coneOpacity} side={THREE.DoubleSide} transparent />
       </mesh>
     </group>
   );
@@ -1247,7 +1259,7 @@ function SceneContents(props: SceneRootProps) {
         <PlazaGround />
         <Vegetation />
         <Landmarks activeTargetId={props.activeTargetId} isContactDialogOpen={props.isContactDialogOpen} labelsVisible={props.labelsVisible} onInteractTarget={props.onInteractTarget} playerPosition={props.playerPosition} />
-        <WorkBoards activeTargetId={props.activeTargetId} labelsVisible={props.labelsVisible} onInteractTarget={props.onInteractTarget} />
+        <WorkBoards activeTargetId={props.activeTargetId} labelsVisible={props.labelsVisible} playerPosition={props.playerPosition} onInteractTarget={props.onInteractTarget} />
         <MemorySculptures activeTargetId={props.activeTargetId} onInteractTarget={props.onInteractTarget} />
         <SkyBackdrop />
       </Physics>
