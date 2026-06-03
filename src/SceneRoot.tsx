@@ -1084,7 +1084,10 @@ function Fountain() {
 
 function SocialSculptures({ activeTargetId, labelsVisible, onInteractTarget }: Pick<SceneRootProps, "activeTargetId" | "labelsVisible" | "onInteractTarget">) {
   const modelPaths: Record<string, string> = {
-    "social:github": asset("/assets/models/landmarks/statue-即刻.glb")
+    "social:github": asset("/assets/models/landmarks/statue-即刻.glb"),
+    "social:jike": asset("/assets/models/landmarks/statue-即刻.glb"),
+    "social:xiaohongshu": asset("/assets/models/landmarks/statue-小红书.glb"),
+    "social:twitter": asset("/assets/models/landmarks/statue-Twitter.glb")
   };
 
   return (

@@ -202,7 +202,10 @@ export const portfolio = {
 
   ] satisfies LinkItem[],
   socials: {
-    github: "https://github.com/kenshinshen1314-sudo?tab=repositories"
+    github: "https://github.com/kenshinshen1314-sudo?tab=repositories",
+    jike: "",
+    xiaohongshu: "",
+    twitter: ""
   },
   contact: {
     email: "kenshinshen1314@gmail.com"
@@ -295,7 +298,10 @@ export const sculptures = [
 ];
 
 export const socialTargets = [
-  { id: "social:github", type: "social", label: "GitHub", socialKey: "github", position: [-3.2, 0, 7.7], radius: 2.35 }
+  { id: "social:github", type: "social", label: "GitHub", socialKey: "github", position: [-3.2, 0, 7.7], radius: 2.35 },
+  { id: "social:jike", type: "social", label: "即刻", socialKey: "jike", position: [-5.8, 0, 10.2], radius: 2.35 },
+  { id: "social:xiaohongshu", type: "social", label: "小红书", socialKey: "xiaohongshu", position: [-1.8, 0, 10.8], radius: 2.35 },
+  { id: "social:twitter", type: "social", label: "Twitter", socialKey: "twitter", position: [-9.6, 0, 9.4], radius: 2.35 }
 ] satisfies WorldTarget[];
 
 export const worldTargets: WorldTarget[] = [
