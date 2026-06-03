@@ -708,11 +708,11 @@ function WorkBoard({ active, labelsVisible, layout, playerPosition, onInteract }
       {showSpotlight && (
         <spotLight
           color="#fff8e8"
-          intensity={3.5}
+          intensity={8}
           position={[0, 14, 2.5]}
-          angle={0.42}
-          penumbra={0.5}
-          decay={1.5}
+          angle={0.45}
+          penumbra={0.4}
+          decay={1.2}
           castShadow
           shadow-bias={-0.001}
           shadow-mapSize-width={512}
@@ -722,7 +722,7 @@ function WorkBoard({ active, labelsVisible, layout, playerPosition, onInteract }
       )}
       <mesh castShadow receiveShadow position={[0, centerY, 0]} onPointerDown={(event) => stopAnd(event, onInteract)}>
         <boxGeometry args={[boardWidth, posterHeight, boardDepth]} />
-        <meshStandardMaterial color={active ? "#e9cbbb" : "#d4c0b3"} emissive={active || showSpotlight ? "#a8756a" : "#000000"} emissiveIntensity={active ? 0.14 : showSpotlight ? 0.08 : 0} roughness={0.9} />
+        <meshStandardMaterial color={active ? "#e9cbbb" : "#d4c0b3"} emissive={active || showSpotlight ? "#a8756a" : "#000000"} emissiveIntensity={active ? 0.14 : showSpotlight ? 0.12 : 0} roughness={0.9} />
       </mesh>
       {isPlaceholder ? (
         <mesh position={[0, centerY, boardDepth / 2 + 0.012]} onPointerDown={(event) => stopAnd(event, onInteract)}>
@@ -745,7 +745,7 @@ function WorkBoard({ active, labelsVisible, layout, playerPosition, onInteract }
 function BoardLighting({ width, height, centerY, active, showSpotlight }: { width: number; height: number; centerY: number; active: boolean; showSpotlight: boolean }) {
   if (!showSpotlight) return <group />;
 
-  const coneOpacity = 0.1;
+  const coneOpacity = 0.18;
   return (
     <group>
       <mesh position={[0, centerY + height / 2 + 0.32, 0.86]} rotation={[0, 0, 0]}>

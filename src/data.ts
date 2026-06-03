@@ -250,7 +250,7 @@ const sculptureCopy = {
     label: "折叠履历",
     title: "金融IT转向AI",
     titleEn: "From Financial IT to AI",
-    body: ["2005-2009  浙江传媒学院 电子信息工程 本科", "2014-2025 恒生电子股份有限公司 金融产品维护经理", "2025-至今 转型AI 独立开发和内容创作", "这条路没有按常规路线走到终点，但它刚好构成了现在的我。"]
+    body: ["2005-2009 浙江传媒学院 电子信息工程 本科", "2014-2025 恒生电子股份有限公司 金融产品维护经理", "2025-至今 转型AI 独立开发和内容创作", "这条路没有按常规路线走到终点，但它刚好构成了现在的我。"]
   },
   C: {
     artifact: "一串绑在一起的通行证",
@@ -269,7 +269,7 @@ const sculptureCopy = {
   E: {
     artifact: "弹出的全息成就面板",
     label: "全息面板",
-    title: "独立开发\内容创作者",
+    title: "独立开发&&内容创作者",
     titleEn: "Independent dev/content creators",
     body: ["独立开发了剧本创作工具Laper.ai、Web版Claudecode、食之书、收录高审美网站的导航站"],
     note: ""
