@@ -211,7 +211,7 @@ export const portfolio = {
     }
   ] satisfies LinkItem[],
   socials: {
-    github: "https://github.com/kenshinshen1314-sudo?tab=repositories",
+    github: "https://github.com/kenshin-ai-101?tab=repositories",
     jike: "",
     xiaohongshu: "",
     twitter: ""
