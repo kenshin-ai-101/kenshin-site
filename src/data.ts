@@ -92,15 +92,15 @@ export const portfolio = {
       clientEn: ""
     },
     {
-      id: "placeholder_beyond_frame",
+      id: "section2_foodbook_site",
       section: "section2",
-      title: "待添加作品",
-      titleEn: "Coming Soon",
-      year: "",
-      posterPath: asset("/assets/posters/section1-palace-cat.webp"),
-      videoPath: null,
-      description: "作品陆续添加中",
-      descriptionEn: "More works coming soon",
+      title: "食之书",
+      titleEn: "FoodBook",
+      year: "2026.1",
+      posterPath: asset("/assets/posters/section2-foodbook-site.webp"),
+      videoPath: videoAsset("section2-foodbook-site.mp4"),
+      description: "拍照识别菜品，AI 自动分析营养成分。让每一口都有意义。",
+      descriptionEn: "AI-powered nutrition analysis for your meals. Every bite counts.",
       client: "",
       clientEn: ""
     },

@@ -23,6 +23,9 @@ function copyStaticShowcaseAssets() {
 
 export default defineConfig({
   plugins: [react(), copyStaticShowcaseAssets()],
+  server: {
+    port: 5234
+  },
   base: "./",
   build: {
     rollupOptions: {
